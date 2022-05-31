@@ -1,6 +1,6 @@
 class Api::AppointmentsController < ApplicationController
   def index
-    # Filter if 
+    # Filter if past is in params
     if params[:past] == "1"
       @appointments = Appointment.where("start_time < ?", Date.today)
     elsif params[:past] == "0"
@@ -38,17 +38,16 @@ class Api::AppointmentsController < ApplicationController
       }
       response << obj
     end
-
     render json: response
-    # TODO: return filtered values
-    # head :ok
   end
+  # {
+  #   patient: { name: <string> },
+  #   doctor: { id: <int> },
+  #   start_time: <iso8604>,
+  #   duration_in_minutes: <int>
+  # }
 
-  def show
-    render json: @appointment
-  end
-
-  def create
+  def create 
     # TODO:
   end
 end

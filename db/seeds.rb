@@ -40,3 +40,8 @@ Appointment.destroy_all
         end
     end
 end
+
+# doctors endpoint, no appointment
+# Doctor.create(
+#     name: Faker::Name.unique.name
+# )
