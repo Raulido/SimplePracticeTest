@@ -33,7 +33,7 @@ for patient in @patients
             patient_id: patient.id,
             doctor_id: patient.doctor_id,
             duration_in_minutes: 50,
-            start_time: Date.today + rand(100000)
+            start_time: Date.today + rand(10000)
         )
     end
     #Past
@@ -42,7 +42,7 @@ for patient in @patients
             patient_id: patient.id,
             doctor_id: patient.doctor_id,
             duration_in_minutes: 50,
-            start_time: Date.today - rand(100000)
+            start_time: Date.today - rand(10000)
         )
     end
 end
