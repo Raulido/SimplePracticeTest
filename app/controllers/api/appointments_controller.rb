@@ -1,7 +1,16 @@
 class Api::AppointmentsController < ApplicationController
   def index
-    # TODO: return all values
-    @appointments = Appointment.all
+    # Filter if 
+    if params[:past] == "1"
+      @appointments = Appointment.where("start_time < ?", Date.today)
+    elsif params[:past] == "0"
+      @appointments = Appointment.where("start_time > ? ", Date.today)
+    else
+      @appointments = Appointment.all
+    end
+  
+    @appointments = @appointments.limit(params[:length]).offset(params[:page])
+    
     response = []
     @doctor = nil
     @patient = nil
@@ -13,7 +22,6 @@ class Api::AppointmentsController < ApplicationController
       if !@patient || appointment.patient_id != @patient.id
         @patient = Patient.where(id: appointment.patient_id).first
       end
-      
       #Constructing Json Array
       obj = {
         id: appointment.id,
