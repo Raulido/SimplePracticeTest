@@ -15,14 +15,12 @@ class Api::AppointmentsController < ApplicationController
     @doctor = nil
     @patient = nil
     for appointment in @appointments
-      #Only query for doctor/patient if needed
       if !@doctor || appointment.doctor_id != @doctor.id
         @doctor = Doctor.where(id: appointment.doctor_id).first
       end
       if !@patient || appointment.patient_id != @patient.id
         @patient = Patient.where(id: appointment.patient_id).first
       end
-      #Constructing Json Array
       obj = {
         id: appointment.id,
         patient: {
@@ -40,14 +38,29 @@ class Api::AppointmentsController < ApplicationController
     end
     render json: response
   end
-  # {
-  #   patient: { name: <string> },
-  #   doctor: { id: <int> },
-  #   start_time: <iso8604>,
-  #   duration_in_minutes: <int>
-  # }
 
   def create 
-    # TODO:
+    appointment = Appointment.new(
+      patient_id: Patient.where(name: appointment_params[:patient][:name]).first.id,
+      doctor_id: Doctor.where(id: appointment_params[:doctor][:id]).first.id,
+      duration_in_minutes: appointment_params[:duration_in_minutes],
+      start_time: appointment_params[:start_time]
+    )
+    if appointment.save!
+      render json: appointment, status: :created
+    else
+      render json: appointment.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def appointment_params
+    params.permit(
+      :start_time, 
+      :duration_in_minutes,
+      :patient => [:name], 
+      :doctor => [:id]
+    )
   end
 end
