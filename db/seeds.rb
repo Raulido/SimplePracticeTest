@@ -10,39 +10,33 @@ Patient.destroy_all
 Appointment.destroy_all
 
 10.times do
-    Doctor.create(
+    # Make 10 Doctors
+    @doctor = Doctor.create(
         name: Faker::Name.unique.name
     )
-end
-
-@doctors = Doctor.all
-for doctor in @doctors
     10.times do
-        Patient.create(
-            doctor_id: doctor.id,
+        #Make 10 Patients per Doctor
+        @patient = Patient.create(
+            doctor_id: @doctor.id,
             name: Faker::Name.unique.name
         )
-    end
-end
-
-@patients = Patient.all
-for patient in @patients
-    #Future
-    5.times do 
-        Appointment.create(
-            patient_id: patient.id,
-            doctor_id: patient.doctor_id,
-            duration_in_minutes: 50,
-            start_time: Date.today + rand(10000)
-        )
-    end
-    #Past
-    5.times do 
-        Appointment.create(
-            patient_id: patient.id,
-            doctor_id: patient.doctor_id,
-            duration_in_minutes: 50,
-            start_time: Date.today - rand(10000)
-        )
+        5.times do 
+            #Make 5 Future Appointments per Patient
+            Appointment.create(
+                patient_id: @patient.id,
+                doctor_id: @patient.doctor_id,
+                duration_in_minutes: 50,
+                start_time: Date.today + rand(10000)
+            )
+        end
+        5.times do 
+            #Make 5 Past Appointments per Patient
+            Appointment.create(
+                patient_id: @patient.id,
+                doctor_id: @patient.doctor_id,
+                duration_in_minutes: 50,
+                start_time: Date.today - rand(10000)
+            )
+        end
     end
 end
