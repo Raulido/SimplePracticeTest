@@ -7,6 +7,7 @@ require 'faker'
 
 Doctor.destroy_all
 Patient.destroy_all
+Appointment.destroy_all
 
 10.times do
     Doctor.create(
