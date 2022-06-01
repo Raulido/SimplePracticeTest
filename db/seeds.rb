@@ -21,21 +21,21 @@ Appointment.destroy_all
             name: Faker::Name.unique.name
         )
         5.times do 
-            #Make 5 Future Appointments per Patient
+            #Make 5 Future Appointments per Patient within 1000 days in the future
             Appointment.create(
                 patient_id: @patient.id,
                 doctor_id: @patient.doctor_id,
                 duration_in_minutes: 50,
-                start_time: Date.today + rand(1000)
+                start_time: Time.zone.now + rand( 60 * 60 * 24 * 1000)
             )
         end
         5.times do 
-            #Make 5 Past Appointments per Patient
+            #Make 5 Past Appointments per Patient within  1000 days in the past
             Appointment.create(
                 patient_id: @patient.id,
                 doctor_id: @patient.doctor_id,
                 duration_in_minutes: 50,
-                start_time: Date.today - rand(1000)
+                start_time: Time.zone.now - rand(60 * 60 * 24 * 1000)
             )
         end
     end
