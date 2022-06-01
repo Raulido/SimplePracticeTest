@@ -72,6 +72,7 @@ helper classes. credit to: (https://thecodest.co/blog/simple-filters-in-rails-ap
 
 Usually, when I apply to a company they send me a leetcode test rather than a test that is more revelvant to the job. So, I appreciate it when companies go out of their way to create more relevant test. Thanks.
 
+------------------------------
 SimplePractice Programming Test
 =======================
 
