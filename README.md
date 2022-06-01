@@ -1,3 +1,77 @@
+My Implemmentation for SimplePractice Programming Test
+=======================
+
+This is my solution to SimplePractice's Programming Test. The test has
+5 requirments that need to be implemmented in a basic Rails API scaffold.
+To test each requirment I used Postman to send GET/POST request to each endpoint. 
+Although not required, I also included some test cases in
+the spec folder to test each requirment.
+
+### My Approach for Requirement 1:
+
+The first requirment was to seed data into the database. I did so by using
+nested for loops. The outer for loop creates 10 doctors, middle for loop 
+creates 10 patients per doctor and the two inner for loops create 10 appointments
+per patient (5 appointments in the future and 5 appointments in the past). 
+
+I use the gem faker to create some random unique patient and doctor names. 
+I also used rand() to create random dates for the appointments.
+
+It is worth mentioning that appointments can overlap with the way I seed the data.
+For example, a doctor can have an appointment that starts at 5:30PM with a duration of
+50 minutes and also have another appointment that same day at 5:50PM. 
+Maybe in the future I could add a validation to the appointmesnt model and a
+overlapping scope "that reads overlapping appointments for an appointment". This isn't
+mentioned in the requirments so I'll leave as it currently is.
+
+credit to: (https://stackoverflow.com/questions/27834133/custom-validator-to-prevent-overlapping-appointments-in-rails-4-app)
+
+
+### My Approach for Requirement 2:
+
+The second requirment is to return all appointments from api/appointments endpoint,
+but with a specific structure. To do this I just iterate through every appointment
+and just create the strucutre per appointment and append that to a variable (response).
+
+### My Approach for Requirement 3:
+
+The third requirment is to allow filtering params for the api/appointments endpoint.
+
+To handle past params I just check params[:past] and if past=1 I query for commands in the past
+by comapring to Time.zone.now. Same thing with past=0 just flip the less than operator to greater than.
+If :past params is not inluded I just retrieve all appointments.
+
+For the pagination filters I just use the built in ruby on rails methods limit and offset.
+@appointments.limit(params[:length]).offset(params[:page])
+
+
+### My Approach for Requirement 4:
+
+Fourth requirment is to return doctors with no appointments via api/doctors endpoint.
+For this I just create a new controller for doctors and a new route.
+Then I just query for all doctors whose id is not in Appointment table.
+@doctors = Doctor.where.not(id: Appointment.all.map(&:doctor_id))
+
+
+### My Approach for Requirement 5:
+
+The last requirment is to make a POST method for api/appointments. For this I just implement the
+create method in the appointments controller. Since params is different from appointment's structure,
+this does require querying to find patient and doctor id. 
+
+It is worth mentioning that it is currently possible to create an appointment
+between a patient and a different doctor that the patient doesn't belong to. This might require
+adding a validation in the appointment model to make sure appointments are only between doctors that
+patients belong to. However, it is not specified to do this in the requirments so I'll leave as is.
+
+### Conclusion
+
+In conclusion, I had a lot of fun with this test. I do think theres some areas I could improve. For example,
+my index method in the applications controller is pretty long and could probably benefit from using some
+helper classes. credit to: (https://thecodest.co/blog/simple-filters-in-rails-api). 
+
+Usually, when I apply to a company they send me a leetcode test rather than a test that is more revelvant to the job. So, I appreciate it when companies go out of their way to create more relevant test. Thanks.
+
 SimplePractice Programming Test
 =======================
 

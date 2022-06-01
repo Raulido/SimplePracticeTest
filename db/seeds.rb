@@ -30,7 +30,7 @@ Appointment.destroy_all
             )
         end
         5.times do 
-            #Make 5 Past Appointments per Patient within  1000 days in the past
+            #Make 5 Past Appointments per Patient within 1000 days in the past
             Appointment.create(
                 patient_id: @patient.id,
                 doctor_id: @patient.doctor_id,
