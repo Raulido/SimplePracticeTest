@@ -26,7 +26,7 @@ Appointment.destroy_all
                 patient_id: @patient.id,
                 doctor_id: @patient.doctor_id,
                 duration_in_minutes: 50,
-                start_time: Date.today + rand(10000)
+                start_time: Date.today + rand(1000)
             )
         end
         5.times do 
@@ -35,7 +35,7 @@ Appointment.destroy_all
                 patient_id: @patient.id,
                 doctor_id: @patient.doctor_id,
                 duration_in_minutes: 50,
-                start_time: Date.today - rand(10000)
+                start_time: Date.today - rand(1000)
             )
         end
     end

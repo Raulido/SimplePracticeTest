@@ -2,13 +2,13 @@ class Api::AppointmentsController < ApplicationController
   def index
     # Filter if past is in params
     if params[:past] == "1"
-      @appointments = Appointment.where("start_time < ?", Date.today)
+      @appointments = Appointment.where("start_time < ?", Time.zone.now)
     elsif params[:past] == "0"
-      @appointments = Appointment.where("start_time > ? ", Date.today)
+      @appointments = Appointment.where("start_time > ? ", Time.zone.now)
     else
       @appointments = Appointment.all
     end
-  
+    #Apply Pagination
     @appointments = @appointments.limit(params[:length]).offset(params[:page])
     
     response = []
