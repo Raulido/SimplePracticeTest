@@ -22,7 +22,7 @@ For example, a doctor can have an appointment that starts at 5:30PM with a durat
 50 minutes and also have another appointment that same day at 5:50PM. 
 Maybe in the future I could add a validation to the appointmesnt model and a
 overlapping scope "that reads overlapping appointments for an appointment". This isn't
-mentioned in the requirments so I'll leave as it currently is.
+mentioned in the requirments so I'll leave it as is.
 
 credit to: (https://stackoverflow.com/questions/27834133/custom-validator-to-prevent-overlapping-appointments-in-rails-4-app)
 
@@ -30,8 +30,8 @@ credit to: (https://stackoverflow.com/questions/27834133/custom-validator-to-pre
 ### My Approach for Requirement 2:
 
 The second requirment is to return all appointments from api/appointments endpoint,
-but with a specific structure. To do this I just iterate through every appointment
-and just create the strucutre per appointment and append that to a variable (response).
+but with a specific structure. To do this I just use a representer class that structures the
+hash based on the spec requirements.
 
 ### My Approach for Requirement 3:
 
@@ -57,20 +57,16 @@ Then I just query for all doctors whose id is not in Appointment table.
 
 The last requirment is to make a POST method for api/appointments. For this I just implement the
 create method in the appointments controller. Since params is different from appointment's structure,
-this does require querying to find patient and doctor id. 
+this does require querying to find patient by name. 
 
 It is worth mentioning that it is currently possible to create an appointment
 between a patient and a different doctor that the patient doesn't belong to. This might require
 adding a validation in the appointment model to make sure appointments are only between doctors that
-patients belong to. However, it is not specified to do this in the requirments so I'll leave as is.
+patients belong to. However, it is not specified to do this in the requirments so I'll leave it as is.
 
 ### Conclusion
 
-In conclusion, I had a lot of fun with this test. I do think theres some areas I could improve. For example,
-my index method in the applications controller is pretty long and could probably benefit from using some
-helper classes. credit to: (https://thecodest.co/blog/simple-filters-in-rails-api). 
-
-Usually, when I apply to a company they send me a leetcode test rather than a test that is more revelvant to the job. So, I appreciate it when companies go out of their way to create more relevant test. Thanks.
+In conclusion, I had a lot of fun with this test. Usually, when I apply to a company they send me a leetcode test rather than a test that is more revelvant to the job. So, I appreciate it when companies go out of their way to create more relevant test. I'm still new to Ruby on Rails so I am not to familiar with the common good code patterns and anti patterns, so hopefully my code isn't a complete eyesore. Thanks. 
 
 ------------------------------
 SimplePractice Programming Test
