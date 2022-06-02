@@ -66,7 +66,7 @@ patients belong to. However, it is not specified to do this in the requirments s
 
 ### Conclusion
 
-In conclusion, I had a lot of fun with this test. Usually, when I apply to a company they send me a leetcode test rather than a test that is more revelvant to the job. So, I appreciate it when companies go out of their way to create more relevant test. I'm still new to Ruby on Rails so I am not to familiar with the common good code patterns and anti patterns, so hopefully my code isn't a complete eyesore. Thanks. 
+In conclusion, I had a lot of fun with this test. Usually, when I apply to a company they send me a leetcode test rather than a test that is more revelvant to the job. So, I appreciate it when companies go out of their way to create more relevant test. I'm still newish to Ruby on Rails so I am not to familiar with the common good code patterns and anti patterns, so hopefully my code isn't a complete eyesore. Thanks. 
 
 ------------------------------
 SimplePractice Programming Test
